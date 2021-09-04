@@ -18,12 +18,13 @@ class Validator {
         this.applyStyle();
         this.setPattern();
         this.elementsForm.forEach(elem => elem.addEventListener('input', this.checkIt.bind(this)));
-       // this.form.addEventListener('change', e => {
-       //     this.elementsForm.forEach(elem => this.checkIt({ target: elem }));
-       //     if (this.error.size) {
-       //         e.preventDefault();
-       //     }
-       // });
+        this.form.addEventListener('submit', e => {
+            this.elementsForm.forEach(elem => this.checkIt({ target: elem }));
+            if (this.error.size) {
+                e.preventDefault();
+                return false;
+            }
+        });
     }
 
 
@@ -58,7 +59,7 @@ class Validator {
         const target = event.target;
         if (this.isValid(target)) {
             this.showSuccess(target);
-            this.error.delete(target);
+            this.error.delete(target);  
         } else {
             this.showError(target);
             this.error.add(target);

@@ -411,6 +411,26 @@ window.addEventListener('DOMContentLoaded', () => {
         const errorMessage = 'Что то пошло не так...',
             loadMessage = 'Загрузка',
             succesMessage = 'Спасибо! Мы скоро с вами свяжемся!';
+        //    function imageLoaded(src, alt = '') {
+        //        return new Promise(function (resolve) {
+        //            const image = document.createElement('img');
+        //
+        //            image.setAttribute('alt', alt);
+        //            image.setAttribute('src', src);
+        //
+        //            image.addEventListener('load', function () {
+        //                resolve(image);
+        //            });
+        //        });
+        //    }
+        //
+        //    async function runExample() {
+        //        const myCat = await imageLoaded('https://placekitten.com/500');
+        //       const myDog = await imageLoaded('https://placedog.net/500');
+        //        form.appendChild(myCat);
+        //        form.appendChild(myDog);
+        //    }
+
 
         const form = document.getElementById(id);
 
@@ -422,6 +442,7 @@ window.addEventListener('DOMContentLoaded', () => {
         form.addEventListener('submit', (event) => {
             event.preventDefault();
             form.appendChild(statusMessage);
+
             statusMessage.textContent = loadMessage;
             const formData = new FormData(form);
 
@@ -434,7 +455,7 @@ window.addEventListener('DOMContentLoaded', () => {
             formData.forEach((val, key) => {
                 body[key] = val;
             })
-            postData(body,
+            postData(body).then(
                 () => {
                     statusMessage.textContent = succesMessage;
                 },
@@ -447,28 +468,28 @@ window.addEventListener('DOMContentLoaded', () => {
         });
 
         //Функция запроса на сервер
-        const postData = (body, outputData, errorData) => {
-            const request = new XMLHttpRequest();
-            request.addEventListener('readystatechange', () => {
-                if (request.readyState !== 4) {
-                    return;
-                }
-                if (request.status === 200) {
-                    outputData();
-                } else {
-                    errorData(request.status);
-                }
+        const postData = (body) => {
+            return new Promise((resolve, reject) => {
+                const request = new XMLHttpRequest();
+                request.addEventListener('readystatechange', () => {
+                    if (request.readyState !== 4) {
+                        return;
+                    }
+                    if (request.status === 200) {
+                        resolve();
+                    } else {
+                        reject(request.status);
+                    }
+                });
+
+                request.open('POST', './server.php');
+                request.setRequestHeader('Content-Type', 'application/json');
+                //multipart/form-data
+
+                request.send(JSON.stringify(body));
+                //request.send(formData);
             });
-
-            request.open('POST', './server.php');
-            request.setRequestHeader('Content-Type', 'application/json');
-            //multipart/form-data
-
-
-
-            request.send(JSON.stringify(body));
-            //request.send(formData);
-        }
+        };
     }
     sendForm('form1');
     sendForm('form2');
