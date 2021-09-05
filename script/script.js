@@ -281,67 +281,89 @@ window.addEventListener('DOMContentLoaded', () => {
     const calcSquare = document.querySelector('.calc-square'),
         calcDay = document.querySelector('.calc-day'),
         calcCount = document.querySelector('.calc-count');
+    const checkCalck = calcInput => {
+        calcInput.addEventListener('blur', () => {
+            calcInput.value = calcInput.value.replace(/[\D]/g, '');
+        });
+    };
 
-    // const checkCalck = calcInput => {
-    //     calcInput.addEventListener('blur', () => {
-    //         calcInput.value = calcInput.value.replace(/[\D]/g, '');
-    //     });
-    // };
-    //
-    // checkCalck(calcSquare);
-    // checkCalck(calcDay);
-    // checkCalck(calcCount);
-    //
-    //
-    // //проверка ввода в полях Ваше имя
-    // const form1Name = document.querySelector('#form1-name'),
-    //     form2Name = document.querySelector('#form2-name');
-    //
-    // const checkName = formName => {
-    //     formName.addEventListener('blur', () => {
-    //         formName.value = formName.value.replace(/[^А-яЁа-яё\s-]/g, '');
-    //         formName.value = formName.value.replace(/^\s+|\s+$/g, '');
-    //         formName.value = formName.value.replace(/^\-+|\-+$/g, '');
-    //         formName.value = formName.value.replace(/^\s+|\s+$/g, '');
-    //         formName.value = formName.value[0].toUpperCase() + formName.value.slice(1).toLowerCase();
-    //         formName.value = formName.value.replace(/[ ]+/g, ' ');
-    //         formName.value = formName.value.replace(/-+/g, '-');
-    //     });
-    // };
-    //
-    // checkName(form1Name);
-    // checkName(form2Name);
-    //
-    //
-    // //проверка ввода email
-    // const form1Email = document.querySelector('#form1-email'),
-    //     form2Email = document.querySelector('#form2-email');
-    //
-    // const checkEmail = formEmail => {
-    //     formEmail.addEventListener('blur', () => {
-    //         formEmail.value = formEmail.value.replace(/[^A-Za-z-@_.~*'!]/g, '');
-    //         formEmail.value = formEmail.value.replace(/-+/g, '-');
-    //         formEmail.value = formEmail.value.replace(/^\-+|\-+$/g, '');
-    //     });
-    // };
-    // checkEmail(form1Email);
-    // checkEmail(form2Email);
-    //
-    //
-    // //проверка ввода телефона
-    // const form1Phone = document.querySelector('#form1-phone'),
-    //     form2Phone = document.querySelector('#form2-phone');
-    //
-    // const checkPhone = formPhone => {
-    //     formPhone.addEventListener('blur', () => {
-    //         formPhone.value = formPhone.value.replace(/[^0-9()-]/g, '');
-    //         formPhone.value = formPhone.value.replace(/-+/g, '-');
-    //         formPhone.value = formPhone.value.replace(/^\-+|\-+$/g, '');
-    //     });
-    // };
-    //
-    // checkPhone(form1Phone);
-    // checkPhone(form2Phone);
+    checkCalck(calcSquare);
+    checkCalck(calcDay);
+    checkCalck(calcCount);
+
+
+    //проверка ввода в полях Ваше имя
+    const form1Name = document.querySelector('#form1-name'),
+        form2Name = document.querySelector('#form2-name'),
+        form3Name = document.querySelector('#form3-name');
+
+    const checkName = formName => {
+        formName.addEventListener('blur', () => {
+            formName.value = formName.value.replace(/[^А-яЁа-яё\s-]/g, '');
+            formName.value = formName.value.replace(/^\s+|\s+$/g, '');
+            formName.value = formName.value.replace(/^\-+|\-+$/g, '');
+            formName.value = formName.value.replace(/^\s+|\s+$/g, '');
+            formName.value = formName.value[0].toUpperCase() + formName.value.slice(1).toLowerCase();
+            formName.value = formName.value.replace(/[ ]+/g, ' ');
+            formName.value = formName.value.replace(/-+/g, '-');
+        });
+    };
+
+    checkName(form1Name);
+    checkName(form2Name);
+    checkName(form3Name);
+
+
+    //проверка ввода email
+    const form1Email = document.querySelector('#form1-email'),
+        form2Email = document.querySelector('#form2-email'),
+        form3Email = document.querySelector('#form3-email');
+
+    const checkEmail = formEmail => {
+        formEmail.addEventListener('blur', () => {
+            formEmail.value = formEmail.value.replace(/[^A-Za-z-@_.~*'!]/g, '');
+            formEmail.value = formEmail.value.replace(/-+/g, '-');
+            formEmail.value = formEmail.value.replace(/^\-+|\-+$/g, '');
+        });
+    };
+    checkEmail(form1Email);
+    checkEmail(form2Email);
+    checkEmail(form3Email);
+
+
+    //проверка ввода телефона
+    const form1Phone = document.querySelector('#form1-phone'),
+        form2Phone = document.querySelector('#form2-phone'),
+        form3Phone = document.querySelector('#form3-phone');
+
+    const checkPhone = formPhone => {
+        formPhone.addEventListener('blur', () => {
+            formPhone.value = formPhone.value.replace(/[^0-9()-]/g, '');
+            formPhone.value = formPhone.value.replace(/-+/g, '-');
+            formPhone.value = formPhone.value.replace(/^\-+|\-+$/g, '');
+        });
+    };
+
+    checkPhone(form1Phone);
+    checkPhone(form2Phone);
+    checkPhone(form3Phone);
+
+    //проверка ввода сообщения
+    const form2Text = document.querySelector('#form2-message');
+
+
+    const checkText = formText => {
+        formText.addEventListener('blur', () => {
+            formText.value = formText.value.replace(/[^А-яЁа-яё\s-@_,.~*'!]/g, '');
+            formText.value = formText.value.replace(/^\-+|\-+$/g, '');
+            formText.value = formText.value.replace(/^\s+|\s+$/g, '');
+            formText.value = formText.value[0].toUpperCase() + formText.value.slice(1).toLowerCase();
+            formText.value = formText.value.replace(/[ ]+/g, ' ');
+            formText.value = formText.value.replace(/-+/g, '-');
+        });
+    };
+
+    checkText(form2Text);
 
 
     //Анимация счетка подсчёта
