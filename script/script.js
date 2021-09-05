@@ -468,19 +468,9 @@ window.addEventListener('DOMContentLoaded', () => {
             statusMessage.textContent = loadMessage;
             const formData = new FormData(form);
 
-            //let body = {};
-
-            //for(let val of formData.entries()){
-            //    body[val[0]]=val;
-            //}
-
             formData.forEach((val, key) => {
                 formData[key] = val;
             });
-
-           // console.log(formData);
-           // console.log(body);
-       
 
             postData(formData)
                 .then((response) => {
@@ -499,14 +489,14 @@ window.addEventListener('DOMContentLoaded', () => {
         });
 
         //Функция запроса на сервер
-        const postData = (body) => {
+        const postData = (formData) => {
 
             return fetch('./server.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(body)
+                body: JSON.stringify(formData)
             });
         };
     };
