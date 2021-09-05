@@ -298,14 +298,8 @@ window.addEventListener('DOMContentLoaded', () => {
         form3Name = document.querySelector('#form3-name');
 
     const checkName = formName => {
-        formName.addEventListener('blur', () => {
+        formName.addEventListener('input', () => {
             formName.value = formName.value.replace(/[^А-яЁа-яё\s-]/g, '');
-            formName.value = formName.value.replace(/^\s+|\s+$/g, '');
-            formName.value = formName.value.replace(/^\-+|\-+$/g, '');
-            formName.value = formName.value.replace(/^\s+|\s+$/g, '');
-            formName.value = formName.value[0].toUpperCase() + formName.value.slice(1).toLowerCase();
-            formName.value = formName.value.replace(/[ ]+/g, ' ');
-            formName.value = formName.value.replace(/-+/g, '-');
         });
     };
 
@@ -321,9 +315,16 @@ window.addEventListener('DOMContentLoaded', () => {
 
     const checkEmail = formEmail => {
         formEmail.addEventListener('blur', () => {
-            formEmail.value = formEmail.value.replace(/[^A-Za-z-@_.~*'!]/g, '');
-            formEmail.value = formEmail.value.replace(/-+/g, '-');
-            formEmail.value = formEmail.value.replace(/^\-+|\-+$/g, '');
+
+            function validate(form) {
+                let reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+                if (reg.test(form) === false) {
+                    alert('Введите корректный e-mail');
+                    formEmail.value = '';
+                    return false;
+                }
+            }
+            validate(formEmail.value);
         });
     };
     checkEmail(form1Email);
@@ -337,10 +338,17 @@ window.addEventListener('DOMContentLoaded', () => {
         form3Phone = document.querySelector('#form3-phone');
 
     const checkPhone = formPhone => {
+
         formPhone.addEventListener('blur', () => {
-            formPhone.value = formPhone.value.replace(/[^0-9()-]/g, '');
-            formPhone.value = formPhone.value.replace(/-+/g, '-');
-            formPhone.value = formPhone.value.replace(/^\-+|\-+$/g, '');
+            function validate(form) {
+                const reg = /^\+?\d[\d\(\)\ -]{4,14}\d$/;
+                if (reg.test(form) === false) {
+                    alert('Введите корректный телефон в формате +79104324039 или 79104324039');
+                    formPhone.value = '';
+                    return false;
+                }
+            }
+            validate(formPhone.value);
         });
     };
 
@@ -351,16 +359,18 @@ window.addEventListener('DOMContentLoaded', () => {
     //проверка ввода сообщения
     const form2Text = document.querySelector('#form2-message');
 
-
     const checkText = formText => {
         formText.addEventListener('blur', () => {
-            formText.value = formText.value.replace(/[^А-яЁа-яё\s-@_,.~*'!]/g, '');
-            formText.value = formText.value.replace(/^\-+|\-+$/g, '');
-            formText.value = formText.value.replace(/^\s+|\s+$/g, '');
-            formText.value = formText.value[0].toUpperCase() + formText.value.slice(1).toLowerCase();
-            formText.value = formText.value.replace(/[ ]+/g, ' ');
-            formText.value = formText.value.replace(/-+/g, '-');
-        });
+            function validate(form) {
+                const reg = /[А-яЁа-яё\0-9\s-@_,.~*'!]$/;
+                if (reg.test(form) === false) {
+                    alert('Введите корректный текст! Можно использовать кириллицу, пробелы, цифры и знаки препинания');
+                    formText.value = '';
+                    return false;
+                }
+            }
+            validate(formText.value);
+           });
     };
 
     checkText(form2Text);
