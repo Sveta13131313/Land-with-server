@@ -343,7 +343,7 @@ window.addEventListener('DOMContentLoaded', () => {
             function validate(form) {
                 const reg = /^\+?\d[\d\(\)\ -]{4,14}\d$/;
                 if (reg.test(form) === false) {
-                    alert('Введите корректный телефон в формате +79104324039 или 79104324039');
+                    alert('Введите корректный телефон в формате +79104324039 или 79104324039 или 89104324039');
                     formPhone.value = '';
                     return false;
                 }
@@ -370,7 +370,7 @@ window.addEventListener('DOMContentLoaded', () => {
                 }
             }
             validate(formText.value);
-           });
+        });
     };
 
     checkText(form2Text);
@@ -469,7 +469,7 @@ window.addEventListener('DOMContentLoaded', () => {
         const statusMessage = document.createElement('div');
         statusMessage.style.cssText = 'font-size: 2rem';
         statusMessage.style.cssText = 'color:white';
-
+        const popup = document.querySelector('.popup');
 
         form.addEventListener('submit', (event) => {
             event.preventDefault();
@@ -487,12 +487,23 @@ window.addEventListener('DOMContentLoaded', () => {
                     if (response.status !== 200) {
                         throw new Error('status network not 200');
                     }
-                    console.log(response)
                     statusMessage.textContent = succesMessage;
+                    setTimeout(function(){
+                        statusMessage.style.display = 'none';
+                    }, 3000);
+                    setTimeout(function(){
+                        popup.style.display = 'none';
+                    }, 5000);
                 })
                 .catch((error) => {
                     statusMessage.textContent = errorMessage;
                     console.error(error);
+                    setTimeout(function(){
+                        statusMessage.style.display = 'none';
+                    }, 3000);
+                    setTimeout(function(){
+                        popup.style.display = 'none';
+                    }, 5000);
                 });
 
             event.target.reset();
