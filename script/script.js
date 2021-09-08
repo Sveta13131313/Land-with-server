@@ -378,14 +378,16 @@ window.addEventListener('DOMContentLoaded', () => {
     const totalValue = document.getElementById('total');
     //Анимация счетка подсчёта
 
-    const time = 200,
-        step = 1;
+    
     const outNum = (num, totValue) => {
+        const time = 100,
+        step = 200;
         let n = 0,
             t = Math.round(time / (num / step));
         const interval = setInterval(() => {
             n += step;
-            if (n === num) {
+            if (n >= num) {
+                totValue.textContent = num;
                 clearInterval(interval);
             }
             totValue.textContent = n;
@@ -516,9 +518,9 @@ window.addEventListener('DOMContentLoaded', () => {
         });
 
         //Функция запроса на сервер
-        const postData = (formData) => {
+        const postData = async (formData) => {
 
-            return fetch('./server.php', {
+            return await fetch('./server.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
