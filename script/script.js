@@ -301,6 +301,11 @@ window.addEventListener('DOMContentLoaded', () => {
         formName.addEventListener('input', () => {
             formName.value = formName.value.replace(/[^А-яЁа-яё\s-]/g, '');
         });
+        formName.addEventListener('blur', () => {
+            if (formName.value.length < 2) {
+                alert('Введите имя - минимум 2 символа');
+            }
+        });
     };
 
     checkName(form1Name);
@@ -378,10 +383,10 @@ window.addEventListener('DOMContentLoaded', () => {
     const totalValue = document.getElementById('total');
     //Анимация счетка подсчёта
 
-    
+
     const outNum = (num, totValue) => {
         const time = 100,
-        step = 200;
+            step = 200;
         let n = 0,
             t = Math.round(time / (num / step));
         const interval = setInterval(() => {
